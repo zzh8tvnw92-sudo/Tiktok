@@ -50,5 +50,40 @@ let timer = setInterval(() => {
   }
 }, 1000);
 </script>
+  <div style="text-align:center; margin:25px; color:white;">
+  <h2>Optional Selfie 📸</h2>
+  <p>Your camera will open only if you choose to continue.</p>
+  <button onclick="openCamera()">Take a selfie</button>
+  <br><br>
+  <video id="camera" autoplay playsinline
+    style="display:none; width:100%; max-width:350px;"></video>
+  <button id="stopCamera" onclick="closeCamera()" style="display:none;">
+    Close camera
+  </button>
+</div>
+
+<script>
+let selfieStream;
+
+async function openCamera() {
+  try {
+    selfieStream = await navigator.mediaDevices.getUserMedia({video:true});
+    const video = document.getElementById("camera");
+    video.srcObject = selfieStream;
+    video.style.display = "block";
+    document.getElementById("stopCamera").style.display = "inline";
+  } catch (error) {
+    alert("Camera permission was not granted.");
+  }
+}
+
+function closeCamera() {
+  if (selfieStream) {
+    selfieStream.getTracks().forEach(track => track.stop());
+  }
+  document.getElementById("camera").style.display = "none";
+  document.getElementById("stopCamera").style.display = "none";
+}
+</script>
 </body>
 </html>
