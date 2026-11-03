@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神秘页面</title>
+<style>
+body {
+  background: #101018;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 60px 15px;
+}
+.box {
+  margin-top: 70px;
+}
+h1 { font-size: 32px; }
+button {
+  padding: 15px 30px;
+  background: #b91c1c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>神秘系统</h1>
+  <p>欢迎来到神秘页面</p>
+  <p id="loading">正在连接系统...</p>
+  <h1 id="count"></h1>
+  <div id="result"></div>
+</div>
+
+<script>
+let count = 3;
+let timer = setInterval(() => {
+  document.getElementById("count").textContent = count;
+  count--;
+
+  if (count < 0) {
+    clearInterval(timer);
+    document.getElementById("loading").textContent = "连接成功！";
+    document.getElementById("count").textContent = "";
+    document.getElementById("result").innerHTML =
+      "<h1>你被骗了！ 💀</h1><h2>YOU GOT PRANKED!</h2><p>BY @B4sidd 😂</p>";
+  }
+}, 1000);
+</script>
+</body>
+</html>
